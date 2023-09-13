@@ -10,6 +10,11 @@ $ServerName = $EventAdmin.MachineName
 $EventCreated = $EventAdmin.TimeCreated
 $EventLevel = $EventAdmin.LevelDisplayName
 
+# Configure sender
+$User = 'sender@email.com'
+$PWord = ConvertTo-SecureString -String 'pass' -AsPlainText -Force
+$Cred = New-Object -TypeName System.Management.Automation.PSCredential -ArgumentList $User, $PWord
+
 # Get the status of all Storage Replica groups on the server
 $M = Get-SRGroup | Format-List -Property Name, ReplicationMode, ReplicationStatus
 $SRMsg = Out-String -InputObject $M
